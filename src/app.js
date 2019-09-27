@@ -15,22 +15,27 @@ const morganOption = (NODE_ENV === 'production') ?
 
 app.use(morgan(morganOption));
 app.use(helmet());
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello, boilerplate!');
 });
 
-app.use(function errorHandler(error, req, res, next) {
-    let response
-    if (NODE_ENV === 'production') {
-        response = {error: { message: 'server error' } }
-    } else {
-        console.error(error)
-        response = { message: error.message, error}
-    }
-    res.status(500).json(response)
-})
+//Catch-all 404
+app.use(function (req, res, next) {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
-app.use(cors());
+//Catch-all Error Handler
+//Add NODE_ENV check to prevent a stacktrace leak
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({
+        message: err.message,
+        error: app.get('env') === 'development' ? err : {}
+    });
+});
 
 module.exports = app;
