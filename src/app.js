@@ -6,8 +6,10 @@ const morgan = require('morgan');
 const cors =  require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const authRouter = require('./auth/auth-router');
 const generalRouter = require('./memory-general/memory-general-router');
-const userRouter = require('./memory-user/memory-user-router');
+const usersRouter = require('./user/user-router')
+
 
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(helmet());
 app.use(cors());
 
 
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/memory-general', generalRouter);
 //app.use('/api/memory-user', userRouter);
 
