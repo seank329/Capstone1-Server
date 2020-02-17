@@ -13,6 +13,7 @@ const jsonBodyParser = express.json();
     than authentication.
 */
 
+
 // Route for getting high scores - beginner level
 generalRouter
     .route('/high_scores/beginner')
