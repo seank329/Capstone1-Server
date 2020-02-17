@@ -7,19 +7,19 @@ TRUNCATE
 
 INSERT INTO memory_user(player_name, password, player_created)
 VALUES
-('Sean', 'ncc1701D!' , now()),
-('David', 'ncc1701D!' , now()),
-('Melissa', 'ncc1701D!' , now()),
-('Ashley', 'ncc1701D!' , now()),
-('Jimmy', 'ncc1701D!' , now());
+('DEMO', 'pas5worD!' , now()),
+('David', 'pas5worD!' , now()),
+('Melissa', 'pas5worD!' , now()),
+('Ashley', 'pas5worD!' , now()),
+('Jimmy', 'pas5worD!' , now());
 
 INSERT INTO memory_general(quickest_game_played_beginner, quickest_game_played_easy, quickest_game_played_medium, quickest_game_played_hard,
                             quickest_game_played_expert, total_time_played, games_played)
 VALUES
-(73, 82, 91, 115, 300 , 200, 22),
-(30, 51, 65, 110, 205 , 326, 10),
-(22, 78, 85, 150, 310 , 447, 5),
-(34, 55, 112, 144, 215 , 200, 44),
+(122, 300, 673, 1023, 1400 , 910, 22),
+(105, 255, 620, 920, 1150, 913, 14),
+(100, 304, 605, 905, 1237 , 1500, 23),
+(144, 287, 632, 815, 1314, 1001, 8),
 (0,0,0,0,0,0,0);
 
 UPDATE memory_general SET player_id = 1 WHERE id = 1;
