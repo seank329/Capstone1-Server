@@ -23,11 +23,10 @@ app.use(cors());
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/memory-general', generalRouter);
-//app.use('/api/memory-user', userRouter);
 
-//app.get('/', (req, res) => {
-  //  res.send('Hello, boilerplate!');
-//});
+app.get('/', (req, res) => {
+   res.send('Hello, boilerplate!');
+});
 
 //Catch-all 404
 app.use(function (req, res, next) {

@@ -5,8 +5,10 @@ const UsersService = require('./user-service')
 const usersRouter = express.Router()
 const jsonBodyParser = express.json()
 
-
-
+/*
+    The 'usersRouter' handles routing related to creation of a new user, as well as the retrieval of a user's
+    id.
+*/
 usersRouter
 .post('/', jsonBodyParser, (req, res, next) => {
     const { player_name, password} = req.body
@@ -37,7 +39,6 @@ usersRouter
                   password: hashedPassword,
                   player_created: 'now()',
               }
-
               return UsersService.insertUser(
                   req.app.get('db'),
                   newUser
@@ -53,6 +54,7 @@ usersRouter
           .catch(next)
 })
 
+//Get player id from database
 usersRouter
 .get('/get_id/:player_name', (req, res, next) =>{
     let name = req.params.player_name

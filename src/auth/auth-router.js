@@ -6,11 +6,11 @@ const AuthService = require('./auth-service')
 const authRouter = express.Router()
 const jsonBodyParser = express.json()
 
+const {requireAuth} = require('../middleware/jwt-auth')
+
 authRouter
  .post('/login', jsonBodyParser, (req, res, next) => {
     const { player_name, password } = req.body
-    console.log(player_name)
-    console.log(password)
     const loginPlayer = { player_name, password }
     
     for (const field of ['player_name', 'password'])
@@ -25,13 +25,13 @@ authRouter
       .then(dbUser => {
         if (!dbUser)
           return res.status(400).json({
-            error: 'Incorrect user_name or password',
+            error: 'Incorrect player_name or password',
           })
         return AuthService.comparePasswords(loginPlayer.password, dbUser.password)
           .then(compareMatch => {
             if(!compareMatch)
               return res.status(400).json({
-                error: `Incorrect user_name or password`
+                error: `Incorrect player_name or password`
               })
             const sub = dbUser.player_name;
             const payload = { player_id: dbUser.id }
@@ -43,5 +43,14 @@ authRouter
       })
       .catch(next)
   })
+
+authRouter.post('/refresh', requireAuth, (req, res) => {
+    const sub = req.user.player_name
+    const payload = { id: req.user.id }
+    res.send({
+      authToken: AuthService.createJwt(sub, payload),
+    })
+  })
+
 
 module.exports = authRouter

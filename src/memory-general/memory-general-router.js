@@ -2,56 +2,100 @@
 
 const express = require('express')
 const MemoryGeneralService = require('./memory-general-service')
-const path = require('path')
+const { requireAuth } = require('../middleware/jwt-auth')
 
 const generalRouter = express.Router();
 const jsonBodyParser = express.json();
 
+
+/*
+    The 'generalRouter' handles all routes which requires resources located in the 'memory' for anything other
+    than authentication.
+*/
+
+// Route for getting high scores - beginner level
 generalRouter
-    .route('/')
-    .get((req, res, next) => {
-        MemoryGeneralService.getAllPlayers(req.app.get('db'))
-        .then(names => {
-            res.json(names.map(MemoryGeneralService.serializeNames))
+    .route('/high_scores/beginner')
+    .get((req,res,next) => {
+        MemoryGeneralService.getHighScoresBeginner(req.app.get('db'))
+        .then(data =>{
+            res.json(data)
         })
-    })
- 
-    .post(jsonBodyParser, (req, res, next) => {
-        const { player_name, total_time_played } = req.body
-        const name = { player_name, total_time_played }
-        MemoryGeneralService.postPlayer(req.app.get('db'), name)
-            .then(name => {
-                res
-                .status(201)
-                .location(path.posix.join(req.originalUrl, `/${name.player_id}`))
-                .json(MemoryGeneralService.serializeNames(name))
-            })
         .catch(next)
     })
 
+// Route for getting high scores - easy level
 generalRouter
+    .route('/high_scores/easy')
+    .get((req,res,next) => {
+        MemoryGeneralService.getHighScoresEasy(req.app.get('db'))
+        .then(data =>{
+            res.json(data)
+        })
+        .catch(next)
+    })
+
+// Route for getting high scores - medium level
+generalRouter
+    .route('/high_scores/medium')
+    .get((req,res,next) => {
+        MemoryGeneralService.getHighScoresMedium(req.app.get('db'))
+        .then(data =>{
+            res.json(data)
+        })
+        .catch(next)
+    })
+
+// Route for getting high scores - hard level     
+generalRouter
+    .route('/high_scores/hard')
+    .get((req,res,next) => {
+        MemoryGeneralService.getHighScoresHard(req.app.get('db'))
+        .then(data =>{
+            res.json(data)
+        })
+        .catch(next)
+    })
+
+// Route for getting high scores - expert level    
+generalRouter
+    .route('/high_scores/expert')
+    .get((req,res,next) => {
+        MemoryGeneralService.getHighScoresExpert(req.app.get('db'))
+        .then(data =>{
+            data ? res.json(data) : res.status(404)
+        })
+        .catch(next)
+    })
+
+// Route for updating total games played
+generalRouter
+    .use(requireAuth)
     .route('/games_played/:id')
     .get((req, res, next) => {
         MemoryGeneralService.updatePlayerGameTotal(req.app.get('db'), req.params.id)
     })
 
+// Route for setting default stats of 0 for a new player
 generalRouter
     .route('/setup/:id')    
     .get((req, res, next) => {
         MemoryGeneralService.setPlayerInitialStats(req.app.get('db'), req.params.id)
     })
 
+// Route for updating the total time played
 generalRouter
     .route('/total_time')
     .post(jsonBodyParser,(req, res, next) => {
         const { total_time_played , player_id } = req.body
         MemoryGeneralService.updateTimePlayed(req.app.get('db'), total_time_played, player_id)
         .then(data => {
-            res.status(201)
+            data ? res.status(201).json(data) : res.status(404)
         })
         .catch(next)
     })
 
+// Route for getting the quickest times for each level
 generalRouter
     .route('/get_quickest_time/:id/:level')
     .get((req,res,next) => {
@@ -64,6 +108,7 @@ generalRouter
         .catch(next)
     })
 
+// Route for posting the the quickest game. Works for each experience level
 generalRouter
     .route('/post_quickest')
     .post(jsonBodyParser,(req, res, next) => {
@@ -75,6 +120,7 @@ generalRouter
         .catch(next)
     })
 
+// Route for getting player statistics
 generalRouter
     .route('/player_stats/:player')
     .get((req,res,next) => {
@@ -86,63 +132,5 @@ generalRouter
         .catch(next)
     })
 
-generalRouter
-    .route('/high_scores/beginner')
-    .get((req,res,next) => {
-        MemoryGeneralService.getHighScoresBeginner(req.app.get('db'))
-        .then(data =>{
-            res.json(data)
-        })
-        .catch(next)
-    })
-
-generalRouter
-    .route('/high_scores/easy')
-    .get((req,res,next) => {
-        MemoryGeneralService.getHighScoresEasy(req.app.get('db'))
-        .then(data =>{
-            res.json(data)
-        })
-        .catch(next)
-    })
-
-generalRouter
-    .route('/high_scores/medium')
-    .get((req,res,next) => {
-        MemoryGeneralService.getHighScoresMedium(req.app.get('db'))
-        .then(data =>{
-            res.json(data)
-        })
-        .catch(next)
-    })
-
-generalRouter
-    .route('/high_scores/hard')
-    .get((req,res,next) => {
-        MemoryGeneralService.getHighScoresHard(req.app.get('db'))
-        .then(data =>{
-            res.json(data)
-        })
-        .catch(next)
-    })
-
-generalRouter
-    .route('/high_scores/expert')
-    .get((req,res,next) => {
-        MemoryGeneralService.getHighScoresExpert(req.app.get('db'))
-        .then(data =>{
-            res.json(data)
-        })
-        .catch(next)
-    })
-
-    // .route('/high_scores')
-    // .get((req, res, next) => {
-    //     MemoryGeneralService.getHighScores(req.app.get('db'))
-    //     .then(scores => {
-    //         res.json(scores)
-    //     })
-    //     .catch(next)
-    // })
 
 module.exports=generalRouter;

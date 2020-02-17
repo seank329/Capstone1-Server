@@ -1,8 +1,11 @@
 'use strict';
 
-const xss = require('xss');
-
+/*
+    The 'MemoryGeneralService' handles all database transactions for resources related to everything but
+    authentication and user creation.
+*/
 const MemoryGeneralService = {
+    // Updates how many time the user has played
     updatePlayerGameTotal(db, newId){
         return db 
             .from('memory_general')
@@ -13,6 +16,7 @@ const MemoryGeneralService = {
               return rows[0];
             });
     },
+    // Sets player stats to defaults upon initial player creation
     setPlayerInitialStats(db, player_id){
         return db
             .into('memory_general')
@@ -22,6 +26,7 @@ const MemoryGeneralService = {
                 return rows[0];
             });
     },
+    // Gets the quickest time played for the experience level
     getTimeForLevel(db, player_id, level){
         let experienceLevel = level.toLowerCase()
         return db
@@ -33,6 +38,7 @@ const MemoryGeneralService = {
                 return rows[0];
             });
     },
+    // Post the quickest time for each experience level if it is the quickest time
     postQuickest(db, player_id, experience, quickest_time){
         switch(experience){
             case('beginner'):
@@ -87,6 +93,7 @@ const MemoryGeneralService = {
                 break;
         }
     },
+    // Update how long the player has played the game in total (listed in seconds)
     updateTimePlayed(db, total_time_played, player_id){
         return db
             .into('memory_general')
@@ -97,6 +104,7 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
+    // Get all relevant player statistics for logged in users. For the player statistics screen
     getPlayerStats(db, player_name){
         return db
             .select(
@@ -117,6 +125,7 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
+    // Get the beginner level high score
     getHighScoresBeginner(db){
         return db
             .select(
@@ -132,6 +141,7 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
+    // Get the easy difficulty level high score
     getHighScoresEasy(db){
         return db
             .select(
@@ -147,6 +157,7 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
+    // Get the medium difficulty level high score
     getHighScoresMedium(db){
         return db
             .select(
@@ -162,6 +173,7 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
+    // Get the hard difficulty level high scores
     getHighScoresHard(db){
         return db
             .select(
@@ -177,6 +189,7 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
+    // Get the expert difficulty level high scores
     getHighScoresExpert(db){
         return db
             .select(
@@ -192,40 +205,6 @@ const MemoryGeneralService = {
                 return rows[0];
               });
     },
-    // getAllPlayers(db) {
-    //     return db
-    //     .from('memory_general')
-    //     .select(
-    //         'player_name'
-    //     )
-    // },
-
-    // getHighScores(db) {
-    //     return db
-    //         .from('memory_general JOIN memory_user ON memory_general.player_name = memory_user.id')
-    //         .select(
-    //             'memory_general.player_name',
-    //             'memory_user.experience_level',
-    //             'memory_user.quickest_game_played'
-    //         )
-    //         .order_by('quickest_game_played')
-    //         .using('>')         
-    // },
-
-    // postPlayer(db, name) {
-    //     return db
-    //         .into('memory_general')    
-    //         .insert(name)
-    //         .catch(err => {console.error(err)})
-    // },
-
-    serializeNames(names) {
-       return {
-           name: xss(names.player_name),
-           created: names.player_created,
-           time: names.total_time_played
-       }
-    }
 }
 
 module.exports = MemoryGeneralService;
