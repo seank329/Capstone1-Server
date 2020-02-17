@@ -122,7 +122,11 @@ const MemoryGeneralService = {
             .join('memory_general', 'memory_general.player_id','memory_user.id')
             .returning('*')
             .then(rows => {
-                return rows[0];
+               if(rows){
+                return rows[0] ;
+               } else {
+                return ('No Data to Report')
+               }
               });
     },
     // Get the beginner level high score
