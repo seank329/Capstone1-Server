@@ -13,7 +13,11 @@ const jsonBodyParser = express.json();
     than authentication.
 */
 
-
+generalRouter.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  
 // Route for getting high scores - beginner level
 generalRouter
     .route('/high_scores/beginner')
