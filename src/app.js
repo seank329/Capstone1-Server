@@ -5,7 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors =  require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config');
+const { NODE_ENV, CLIENT_ORIGIN } = require('./config');
 const authRouter = require('./auth/auth-router');
 const generalRouter = require('./memory-general/memory-general-router');
 const usersRouter = require('./user/user-router')
@@ -17,7 +17,13 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(helmet());
-app.use(cors());
+
+app.use(
+	cors({
+		origin: CLIENT_ORIGIN
+	})
+);
+//app.use(cors());
 
 
 app.use('/api/users', usersRouter);
