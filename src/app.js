@@ -21,7 +21,7 @@ let corsOptions = {
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 app.use(helmet());
 
 // app.options('*', cors())
@@ -32,6 +32,13 @@ app.use(helmet());
 //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
 //     next();
 //   });
+
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+  });
+
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
