@@ -13,10 +13,24 @@ const usersRouter = require('./user/user-router')
 
 const app = express();
 
+let whiteListOrigin = config.CLIENT_ORIGIN
+let corsOptions = {
+    origin: function (origin, callback) {
+      if (whiteListOrigin === origin || !origin) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }
+
+
+
+
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(helmet());
 
 // app.use(
@@ -32,20 +46,11 @@ app.use(helmet());
 //   });
 
 
-let whiteListOrigin = config.CLIENT_ORIGIN
-let corsOptions = {
-    origin: function (origin, callback) {
-      if (whiteListOrigin === origin || !origin) {
-        callback(null, true)
-      } else {
-        callback(new Error('Not allowed by CORS'))
-      }
-    }
-  }
+
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general', cors(corsOptions), generalRouter);
+app.use('/api/memory-general', generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
