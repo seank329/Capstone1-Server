@@ -17,11 +17,20 @@ const app = express();
 //     origin: '*',
 //     optionsSuccessStatus:200
 // }
-
+var whitelist = 'https://memory-app-sigma.now.sh'
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist=== origin || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(helmet());
 
 app.use('/api/users', usersRouter);
