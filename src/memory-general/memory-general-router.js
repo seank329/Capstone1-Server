@@ -131,7 +131,7 @@ generalRouter
 
 // Route for getting player statistics
 generalRouter
-    .route('/player_stats/:player')
+    .route('/player_stats/:player', cors())
     // .use(cors())
     .get((req,res,next) => {
         const player_name = req.params.player
