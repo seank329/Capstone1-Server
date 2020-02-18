@@ -8,13 +8,15 @@ const { requireAuth } = require('../middleware/jwt-auth')
 const generalRouter = express.Router();
 const jsonBodyParser = express.json();
 
-
 /*
     The 'generalRouter' handles all routes which requires resources located in the 'memory' for anything other
     than authentication.
 */
 
 // Route for getting high scores - beginner level
+generalRouter
+    .options('/memory-general/player_stats/:player', cors())
+
 generalRouter
     .route('/high_scores/beginner')
     .get((req,res,next) => {

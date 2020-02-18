@@ -28,7 +28,7 @@ let corsOptions = {
   }
 }
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
-app.options('/memory-general/player_stats/:player', cors()) // enable pre-flight request
+
 
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
@@ -37,7 +37,7 @@ app.use(helmet());
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general', cors(corsOptions), generalRouter);
+app.use('/api/memory-general',  generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
