@@ -18,23 +18,11 @@ let corsOptions = {
     optionsSuccessStatus:200
 }
 
-
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors(corsOptions));
 app.use(helmet());
-
-// app.use(
-// 	cors({
-// 		origin: CLIENT_ORIGIN
-// 	})
-// );
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-//   });
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
