@@ -13,20 +13,20 @@ const usersRouter = require('./user/user-router')
 
 const app = express();
 
-// let corsOptions = {
-//     origin: '*',
-//     optionsSuccessStatus:200
-// }
-let whitelist = 'https://memory-app-sigma.now.sh'
 let corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist=== origin || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
+    origin: '*',
+    optionsSuccessStatus:200
 }
+// let whitelist = 'https://memory-app-sigma.now.sh'
+// let corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist === origin || !origin) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 

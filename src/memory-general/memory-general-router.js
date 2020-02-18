@@ -129,7 +129,7 @@ generalRouter
     .get((req,res,next) => {
         const player_name = req.params.player
         MemoryGeneralService.getPlayerStats(req.app.get('db'), player_name)
-        .then(data =>{
+        .then(data => {
             data ? res.status(201).json(data) : res.status(404)
         })
         .catch(next)
