@@ -19,22 +19,7 @@ let corsOptions = {
     allowedHeaders:'Content-type, authorization',
     optionsSuccessStatus:200
 }
-// let whitelist = 'https://memory-app-sigma.now.sh'
-// let corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist === origin || !origin) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Authorization, Accept");
-    next();
-  });
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors(corsOptions));
