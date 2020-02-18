@@ -16,7 +16,7 @@ const app = express();
 let corsOptions = {
     origin: '*',
     methods: 'GET, POST, PUT',
-    allowedHeaders:'Content-type, Authorization',
+    allowedHeaders:'Content-type, authorization',
     optionsSuccessStatus:200
 }
 // let whitelist = 'https://memory-app-sigma.now.sh'
