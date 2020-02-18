@@ -13,24 +13,16 @@ const usersRouter = require('./user/user-router')
 
 const app = express();
 
-// let whiteListOrigin = config.CLIENT_ORIGIN
-// let corsOptions = {
-//     origin: function (origin, callback) {
-//       if (whiteListOrigin === origin || !origin) {
-//         callback(null, true)
-//       } else {
-//         callback(new Error('Not allowed by CORS'))
-//       }
-//     }
-//   }
-
-
+let corsOptions = {
+    origin: '*',
+    optionsSuccessStatus:200
+}
 
 
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(helmet());
 
 // app.use(
@@ -38,11 +30,11 @@ app.use(helmet());
 // 		origin: CLIENT_ORIGIN
 // 	})
 // );
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
