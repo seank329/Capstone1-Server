@@ -39,7 +39,7 @@ app.use(helmet());
 // 	})
 // );
 
-
+app.options('/api/memory-general/player_stats/:player', cors())
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/memory-general', generalRouter);
