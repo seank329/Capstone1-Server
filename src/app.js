@@ -30,10 +30,9 @@ app.use(helmet());
 //     res.header('Access-Control-Allow-Origin', '*');
 //     next();
 //   });
-
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general', cors({origin:CLIENT_ORIGIN}),generalRouter);
+app.use('/api/memory-general',generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');

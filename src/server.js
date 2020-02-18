@@ -1,5 +1,6 @@
 'use strict';
 const knex=require('knex')
+const cors = require('cors')
 const app = require('./app');
 const { PORT, DATABASE_URL } = require('./config');
 
@@ -9,7 +10,7 @@ const db = knex({
 })
 
 app.set('db', db)
-
+app.options('*', cors())
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost: ${PORT} `)
 })
