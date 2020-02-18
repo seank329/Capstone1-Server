@@ -41,10 +41,8 @@ let corsOptions = {
     }
   }
 
-
-app.options('*', cors())
 app.use('/api/users',cors(corsOptions), usersRouter);
-app.use('/api/auth',cors(corsOptions), authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/memory-general', cors(corsOptions), generalRouter);
 
 app.get('/', (req, res) => {
