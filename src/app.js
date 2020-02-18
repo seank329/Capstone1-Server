@@ -17,8 +17,8 @@ const app = express();
 //     origin: '*',
 //     optionsSuccessStatus:200
 // }
-var whitelist = 'https://memory-app-sigma.now.sh'
-var corsOptions = {
+let whitelist = 'https://memory-app-sigma.now.sh'
+let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist=== origin || !origin) {
       callback(null, true)
@@ -28,6 +28,8 @@ var corsOptions = {
   }
 }
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
+app.options('/memory-general/player_stats/:player', cors()) // enable pre-flight request
+
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors(corsOptions));
