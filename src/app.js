@@ -13,15 +13,15 @@ const usersRouter = require('./user/user-router')
 
 const app = express();
 
-let corsOptions = {
-    origin: '*',
-    optionsSuccessStatus:200
-}
+// let corsOptions = {
+//     origin: '*',
+//     optionsSuccessStatus:200
+// }
 
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 
 // app.options('*', cors())
