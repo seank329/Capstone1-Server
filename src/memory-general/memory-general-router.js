@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express')
+const cors = require('cors')
 const MemoryGeneralService = require('./memory-general-service')
 const { requireAuth } = require('../middleware/jwt-auth')
 
@@ -14,8 +15,12 @@ const jsonBodyParser = express.json();
 */
 
 // Route for getting high scores - beginner level
-const app = express()
 
+generalRouter.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://memory-app-sigma.now.sh"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 generalRouter
     .route('/high_scores/beginner')
