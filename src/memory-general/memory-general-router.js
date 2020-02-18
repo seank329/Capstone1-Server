@@ -15,6 +15,13 @@ const jsonBodyParser = express.json();
 */
 
 // Route for getting high scores - beginner level
+generalRouter.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH');
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+  });
+
 
 generalRouter
     .route('/high_scores/beginner')
