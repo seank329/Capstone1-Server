@@ -30,10 +30,10 @@ app.use(helmet());
 //     res.header('Access-Control-Allow-Origin', '*');
 //     next();
 //   });
-let whitelist = config.CLIENT_ORIGIN
+let whiteListOrigin = config.CLIENT_ORIGIN
 let corsOptions = {
     origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1 || !origin) {
+      if (whiteListOrigin === origin || !origin) {
         callback(null, true)
       } else {
         callback(new Error('Not allowed by CORS'))
