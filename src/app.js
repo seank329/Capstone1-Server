@@ -32,20 +32,20 @@ app.use(helmet());
 //   });
 
 
-// let whiteListOrigin = config.CLIENT_ORIGIN
-// let corsOptions = {
-//     origin: function (origin, callback) {
-//       if (whiteListOrigin === origin || !origin) {
-//         callback(null, true)
-//       } else {
-//         callback(new Error('Not allowed by CORS'))
-//       }
-//     }
-//   }
+let whiteListOrigin = config.CLIENT_ORIGIN
+let corsOptions = {
+    origin: function (origin, callback) {
+      if (whiteListOrigin === origin || !origin) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general',cors(), generalRouter);
+app.use('/api/memory-general', cors(corsOptions), generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
