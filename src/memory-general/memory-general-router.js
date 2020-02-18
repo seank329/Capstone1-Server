@@ -78,7 +78,7 @@ generalRouter
 
 // Route for updating total games played
 generalRouter
-    .use(requireAuth)
+    //.use(requireAuth)
     .route('/games_played/:id')
     .get((req, res, next) => {
         MemoryGeneralService.updatePlayerGameTotal(req.app.get('db'), req.params.id)
