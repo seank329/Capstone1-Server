@@ -47,9 +47,9 @@ let corsOptions = {
     }
   }
 
-app.use('/api/users',cors(corsOptions), usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general', cors(corsOptions), generalRouter);
+app.use('/api/memory-general', generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
