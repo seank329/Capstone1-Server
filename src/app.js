@@ -16,19 +16,20 @@ const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
+app.use(cors());
 app.use(helmet());
 
-app.use(
-	cors({
-		origin: CLIENT_ORIGIN
-	})
-);
-//app.use(cors());
+// app.use(
+// 	cors({
+// 		origin: CLIENT_ORIGIN
+// 	})
+// );
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
+
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     next();
+//   });
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
