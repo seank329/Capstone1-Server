@@ -37,7 +37,7 @@ app.use(helmet());
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general', generalRouter);
+app.use('/api/memory-general', cors(corsOptions), generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
