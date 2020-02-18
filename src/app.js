@@ -28,7 +28,11 @@ let corsOptions = {
 //   }
 // }
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
