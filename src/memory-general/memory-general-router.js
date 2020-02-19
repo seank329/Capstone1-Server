@@ -123,8 +123,8 @@ generalRouter
 generalRouter
     .route('/player_stats/:id')
     .get((req,res,next) => {
-        const player_id = req.params.id
-        MemoryGeneralService.getPlayerStats(req.app.get('db'), player_id)
+        const id = req.params.id
+        MemoryGeneralService.getPlayerStats(req.app.get('db'), id)
         .then(data => {
             data ? res.status(201).json(data) : res.status(404)
         })
