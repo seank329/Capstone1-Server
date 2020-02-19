@@ -36,15 +36,16 @@ authRouter
             const sub = dbUser.player_name;
             const payload = { player_id: dbUser.id }
             res.send({
-              authToken: AuthService.createJwt(sub, payload)
+              authToken: AuthService.createJwt(sub, payload),
+              id:dbUser.id
             })
           })   
       })
-      .then(dbUser => {
-        if(dbUser){
-          return dbUser.id
-        }
-      })
+      // .then(dbUser => {
+      //   if(dbUser){
+      //     return dbUser.id
+      //   }
+      // })
       .catch(next)
   })
 
