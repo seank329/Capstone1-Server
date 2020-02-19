@@ -25,11 +25,13 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 //   callback(null, corsOptions) // callback expects two parameters: error and options
 // }
 
+var corsOptions = {
+    origin: process.env.CLIENT_ORIGIN,
+    credentials:true
+};
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors({
-        origin : process.env.CLIENT_ORIGIN,
-            }));
+app.use(cors(corsOptions));
 //app.use(cors(corsOptionsDelegate))
 app.use(helmet());
 
