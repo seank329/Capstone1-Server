@@ -28,7 +28,8 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 var corsOptions = {
     origin: process.env.CLIENT_ORIGIN,
     exposedHeaders:('*', 'authorization'),
-    credentials:true
+    credentials:true,
+    preflightContinue
 };
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
