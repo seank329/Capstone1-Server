@@ -55,17 +55,17 @@ usersRouter
 })
 
 //Get player id from database
-usersRouter
-.get('/get_id/:player_name', (req, res, next) =>{
-    let name = req.params.player_name
-    UsersService.getUserId(
-        req.app.get('db'),
-        name
-    )
-    .then(id => {
-        res.status(200).json(id)
-    })
-    .catch(next)
-})
+// usersRouter
+// .get('/get_id/:player_name', (req, res, next) =>{
+//     let name = req.params.player_name
+//     UsersService.getUserId(
+//         req.app.get('db'),
+//         name
+//     )
+//     .then(id => {
+//         res.status(200).json(id)
+//     })
+//     .catch(next)
+// })
 
 module.exports = usersRouter

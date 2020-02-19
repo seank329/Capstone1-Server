@@ -14,37 +14,12 @@ const app = express();
 
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
-// var whitelist = ['https://memory-app-sigma.now.sh']
-// var corsOptionsDelegate = function (req, callback) {
-//   var corsOptions;
-//   if (whitelist.indexOf(req.header('Origin')) !== -1) {
-//     corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-//   } else {
-//     corsOptions = { origin: false } // disable CORS for this request
-//   }
-//   callback(null, corsOptions) // callback expects two parameters: error and options
-// }
-
-// var corsOptions = {
-//     origin: process.env.CLIENT_ORIGIN,
-//     credentials:true,
-// };
+var corsOptions = {
+    origin: process.env.CLIENT_ORIGIN,
+};
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-//app.use(cors(corsOptions));
-//app.use(cors(corsOptionsDelegate))
-app.all('*',function(req,res,next)
-{
-    if (!req.get('Origin')) return next();
-
-    res.set('Access-Control-Allow-Origin','https://memory-app-sigma.now.sh');
-    res.set('Access-Control-Allow-Methods','GET,POST');
-    res.set('Access-Control-Allow-Headers','X-Requested-With,Content-Type,authorization');
-
-    if ('OPTIONS' == req.method) return res.send(200);
-
-    next();
-});
+app.use(cors(corsOptions));
 app.use(helmet());
 
 app.use('/api/users', usersRouter);

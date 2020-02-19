@@ -9,13 +9,13 @@ const UsersService = {
             .first()
             .then(user => !!user)
     },
-    getUserId(db, player_name){
-      return db
-              .select('id')
-              .from('memory_user')
-              .where({ player_name })
-              .first()
-    },
+    // getUserId(db, player_name){
+    //   return db
+    //           .select('id')
+    //           .from('memory_user')
+    //           .where({ player_name })
+    //           .first()
+    // },
     insertUser(db, newPlayer) {
         return db   
             .insert(newPlayer)
