@@ -105,7 +105,7 @@ const MemoryGeneralService = {
               });
     },
     // Get all relevant player statistics for logged in users. For the player statistics screen
-    getPlayerStats(db, player_id){
+    getPlayerStats(db, id){
         return db
             .select(
                 'memory_user.player_name',
@@ -118,7 +118,7 @@ const MemoryGeneralService = {
                 'memory_general.quickest_game_played_hard'
             )
             .from('memory_user')
-            .where({ player_id })
+            .where({ id })
             .join('memory_general', 'memory_general.player_id','memory_user.id')
             .returning('*')
             .then(rows => {
