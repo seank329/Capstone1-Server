@@ -39,7 +39,7 @@ app.all('*',function(req,res,next)
 
     res.set('Access-Control-Allow-Origin','https://memory-app-sigma.now.sh');
     res.set('Access-Control-Allow-Methods','GET,POST');
-    res.set('Access-Control-Allow-Headers','X-Requested-With,Content-Type');
+    res.set('Access-Control-Allow-Headers','X-Requested-With,Content-Type,authorization');
 
     if ('OPTIONS' == req.method) return res.send(200);
 
