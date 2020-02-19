@@ -13,8 +13,6 @@ const jsonBodyParser = express.json();
 */
 
 // Route for getting high scores - beginner level
-
-generalRouter.options('/player_stats/:player', cors({origin:process.env.CLIENT_ORIGIN, credentials:true}))
 generalRouter
     .route('/high_scores/beginner')
     .get((req,res,next) => {
@@ -121,18 +119,6 @@ generalRouter
         .catch(next)
     })
 
-generalRouter.route('/player_stats/:player',function(req,res,next)
-    {
-        if (!req.get('Origin')) return next();
-    
-        res.set('Access-Control-Allow-Origin','https://memory-app-sigma.now.sh');
-        res.set('Access-Control-Allow-Methods','GET,POST');
-        res.set('Access-Control-Allow-Headers','X-Requested-With,Content-Type,authorization');
-    
-        if ('OPTIONS' == req.method) return res.send(200);
-    
-        next();
-    });
 // Route for getting player statistics
 generalRouter
     .route('/player_stats/:player')
