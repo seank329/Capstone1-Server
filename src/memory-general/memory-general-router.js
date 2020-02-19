@@ -14,7 +14,7 @@ const jsonBodyParser = express.json();
 
 // Route for getting high scores - beginner level
 
-generalRouter.options('/player_stats/:player', cors())
+generalRouter.options('/player_stats/:player', cors({origin:process.env.CLIENT_ORIGIN, credentials:true}))
 generalRouter
     .route('/high_scores/beginner')
     .get((req,res,next) => {
