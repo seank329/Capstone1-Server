@@ -119,7 +119,7 @@ const MemoryGeneralService = {
             )
             .from('memory_user')
             .where({ id })
-            .join('memory_general', 'memory_general.player_id','memory_user.id')
+            .join('memory_general', 'memory_general.id','memory_user.id')
             .returning('*')
             .then(rows => {
                 return rows[0] ;
