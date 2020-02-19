@@ -3,7 +3,7 @@ require ('dotenv').config()
 const express = require('express')
 const MemoryGeneralService = require('./memory-general-service')
 const { requireAuth } = require('../middleware/jwt-auth')
-
+const cors = require('cors')
 const generalRouter = express.Router();
 const jsonBodyParser = express.json();
 
@@ -13,9 +13,8 @@ const jsonBodyParser = express.json();
 */
 
 // Route for getting high scores - beginner level
-generalRouter.all('*', cors({origin: process.env.CLIENT_ORIGIN , credentials:true}))
 
-
+generalRouter.options('/player_stats/:player', cors())
 generalRouter
     .route('/high_scores/beginner')
     .get((req,res,next) => {

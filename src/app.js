@@ -13,22 +13,25 @@ const usersRouter = require('./user/user-router')
 const app = express();
 
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
-var whitelist = ['https://memory-app-sigma.now.sh']
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (whitelist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
-  }
-  callback(null, corsOptions) // callback expects two parameters: error and options
-}
+
+// var whitelist = ['https://memory-app-sigma.now.sh']
+// var corsOptionsDelegate = function (req, callback) {
+//   var corsOptions;
+//   if (whitelist.indexOf(req.header('Origin')) !== -1) {
+//     corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+//   } else {
+//     corsOptions = { origin: false } // disable CORS for this request
+//   }
+//   callback(null, corsOptions) // callback expects two parameters: error and options
+// }
 
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-// app.use(cors({origin : process.env.CLIENT_ORIGIN, 
-//               credentials : true}));
-app.use(cors(corsOptionsDelegate))
+app.use(cors({
+        origin : process.env.CLIENT_ORIGIN, 
+        credentials : true
+            }));
+//app.use(cors(corsOptionsDelegate))
 app.use(helmet());
 
 app.use('/api/users', usersRouter);

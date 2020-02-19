@@ -8,7 +8,6 @@ const jsonBodyParser = express.json()
 
 const {requireAuth} = require('../middleware/jwt-auth')
 
-authRouter.all('*', cors({origin: process.env.CLIENT_ORIGIN , credentials:true}))
 authRouter
  .post('/login', jsonBodyParser, (req, res, next) => {
     const { player_name, password } = req.body
