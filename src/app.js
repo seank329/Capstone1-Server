@@ -13,16 +13,10 @@ const usersRouter = require('./user/user-router')
 
 const app = express();
 
-let corsOptions = {
-    origin: '*',
-    methods: 'GET, POST, PUT',
-    allowedHeaders:'Content-type, authorization',
-    optionsSuccessStatus:200
-}
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors(corsOptions));
+app.use(cors({origin :  process.env.CLIENT_ORIGIN}));
 app.use(helmet());
 
 app.use('/api/users', usersRouter);
