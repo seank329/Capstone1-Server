@@ -121,10 +121,10 @@ generalRouter
 
 // Route for getting player statistics
 generalRouter
-    .route('/player_stats/:player')
+    .route('/player_stats/:id')
     .get((req,res,next) => {
-        const player_name = req.params.player
-        MemoryGeneralService.getPlayerStats(req.app.get('db'), player_name)
+        const player_id = req.params.id
+        MemoryGeneralService.getPlayerStats(req.app.get('db'), player_id)
         .then(data => {
             data ? res.status(201).json(data) : res.status(404)
         })
