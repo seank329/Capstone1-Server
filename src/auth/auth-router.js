@@ -41,11 +41,6 @@ authRouter
             })
           })   
       })
-      // .then(dbUser => {
-      //   if(dbUser){
-      //     return dbUser.id
-      //   }
-      // })
       .catch(next)
   })
 
