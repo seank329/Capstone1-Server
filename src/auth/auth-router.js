@@ -38,8 +38,12 @@ authRouter
             res.send({
               authToken: AuthService.createJwt(sub, payload)
             })
-          })
-          
+          })   
+      })
+      .then(dbUser => {
+        if(dbUser){
+          return dbUser.id
+        }
       })
       .catch(next)
   })
