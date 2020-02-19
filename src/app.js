@@ -25,14 +25,26 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 //   callback(null, corsOptions) // callback expects two parameters: error and options
 // }
 
-var corsOptions = {
-    origin: process.env.CLIENT_ORIGIN,
-    credentials:true,
-};
+// var corsOptions = {
+//     origin: process.env.CLIENT_ORIGIN,
+//     credentials:true,
+// };
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 //app.use(cors(corsOptionsDelegate))
+app.all('*',function(req,res,next)
+{
+    if (!req.get('Origin')) return next();
+
+    res.set('Access-Control-Allow-Origin','https://memory-app-sigma.now.sh/');
+    res.set('Access-Control-Allow-Methods','GET,POST');
+    res.set('Access-Control-Allow-Headers','X-Requested-With,Content-Type');
+
+    if ('OPTIONS' == req.method) return res.send(200);
+
+    next();
+});
 app.use(helmet());
 
 app.use('/api/users', usersRouter);
