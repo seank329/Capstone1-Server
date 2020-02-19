@@ -37,7 +37,7 @@ app.all('*',function(req,res,next)
 {
     if (!req.get('Origin')) return next();
 
-    res.set('Access-Control-Allow-Origin','https://memory-app-sigma.now.sh/');
+    res.set('Access-Control-Allow-Origin','https://memory-app-sigma.now.sh');
     res.set('Access-Control-Allow-Methods','GET,POST');
     res.set('Access-Control-Allow-Headers','X-Requested-With,Content-Type');
 
