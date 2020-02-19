@@ -31,7 +31,7 @@ app.use(cors({
         origin : process.env.CLIENT_ORIGIN,
         methods: 'GET, PUT, POST', 
         credentials : true,
-        allowedHeaders: 'content-type, authorization',
+        allowedHeaders: 'content-type, authorization, X-Custom-Header',
         preflightContinue
             }));
 //app.use(cors(corsOptionsDelegate))
