@@ -118,7 +118,7 @@ const MemoryGeneralService = {
                 'memory_general.quickest_game_played_hard'
             )
             .from('memory_user')
-            .where({player_id})
+            .where({'id' : player_id})
             .join('memory_general', 'memory_general.player_id','memory_user.id')
             .returning('*')
             .then(rows => {
