@@ -22,24 +22,24 @@ API Documentation
     Route for authentication.   <br />
     Endpoints: 
       * .post (/login)   <br />
-            Login Credentials, Posting   <br />
+            > Login Credentials, Posting   <br />
       * .post (/refresh)   <br />
-            Login Credentials, Refreshing
+            > Login Credentials, Refreshing
          
   
   * ##### /api/users, userRouter
     Route for registering new users.   <br />
     Endpoints:
       * .post (/)   <br />
-            Registering a new player
+            > Registering a new player
   
   * ##### /api/memory-general, generalRouter.   
     Route for getting and receiving game data.   <br />
     Endpoints:
        * .get (/experience/:level)   <br />
-            Route for getting high scores at each level. Returns time and player with top score.   <br />
+          > Route for getting high scores at each level. Returns time and player with top score.   <br />
        * .get, .post, .put (/player/:id)   <br />
-          Route for getting, posting, and updating player data
+          > Routes for getting, posting, and updating player data
   
 
        
