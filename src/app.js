@@ -16,11 +16,11 @@ const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 var corsOptions = {
-    origin: CLIENT_ORIGIN //process.env.CLIENT_ORIGIN,
+    origin: CLIENT_ORIGIN,  //process.env.CLIENT_ORIGIN,
 };
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(helmet());
 
 app.use('/api/users', usersRouter);
