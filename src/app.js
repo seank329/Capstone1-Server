@@ -18,7 +18,7 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors({
     origin: CLIENT_ORIGIN,
-    allowedHeaders : 'X-Custom-Header,content-type, authorization'
+    allowedHeaders : 'Content-Type, Authorization'
 }));
 app.use(helmet());
 
