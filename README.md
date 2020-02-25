@@ -1,26 +1,68 @@
-# Express Boilerplate!
+Memory Challenge - Server
+=========================
 
-This is a boilerplate project used for starting new projects!
+   <br />
+   <br />
+   
+Link to Live
+------------
+https://memory-app-sigma.now.sh/   
 
-## Set up
+   <br />
+   <br />
+   
+API Documentation
+-----------------
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+  ### Routes ###
 
-## Scripts
 
-Start the application `npm start`
+  * ##### /api/auth, authRouter
+    Route for authentication.   <br />
+    Endpoints: 
+      * .post (/login)   <br />
+         > Login Credentials, Posting   <br />
+      * .post (/refresh)   <br />
+         > Login Credentials, Refreshing
+         
+  
+  * ##### /api/users, userRouter
+    Route for registering new users.   <br />
+    Endpoints:
+      * .post (/)   <br />
+         > Registering a new player
+  
+  * ##### /api/memory-general, generalRouter.   
+    Route for getting and receiving game data.   <br />
+    Endpoints:
+       * .get (/experience/:level)   <br />
+          > Route for getting high scores at each level. Returns time and player with top score.   <br />
+       * .get, .post, .put (/player/:id)   <br />
+          > Routes for getting, posting, and updating player data
+  
 
-Start nodemon for the application `npm run dev`
+       
+   
+   Screenshots
+   -----------
+   Please Visit : https://github.com/seank329/Capstone1-UI/blob/master/README.md
+      
+   Description
+   -----------
+   This app is a fun game designed to challenge your memory! Cards are randomly ordered, face down. Try to find matching 
+   pairs to clear the game board and try to get the lowest times possible. Login to keep track of your fastest games at each
+   difficulty level, as well as total games played, and total time spent clearing the game-board!
+      <br />
+      <br />
 
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+       
+   Technologies Used
+   -----------------
+   * React.JS
+   * HTML
+   * CSS
+   * Node.JS
+   * Express.JS
+   * PostgresQL
+   
