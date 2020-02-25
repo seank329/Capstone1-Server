@@ -22,9 +22,9 @@ API Documentation
     Route for authentication.   <br />
     Endpoints: 
       * .post (/login)   <br />
-             > Login Credentials, Posting   <br />
+         > Login Credentials, Posting   <br />
       * .post (/refresh)   <br />
-             > Login Credentials, Refreshing
+         > Login Credentials, Refreshing
          
   
   * ##### /api/users, userRouter
