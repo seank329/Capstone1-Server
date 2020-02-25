@@ -25,7 +25,7 @@ generalRouter
 // Route for getting, posting, and updating player data
 generalRouter
     .route('/:id')
-    .get(cors(), requireAuth, (req,res,next) => {
+    .get((req,res,next) => {
         MemoryGeneralService.getPlayerStats(req.app.get('db'), req.params.id)
         .then(data => {
             data ? res.status(200).json(data) : res.status(404)
