@@ -27,6 +27,8 @@ API Documentation
   
   * ##### /api/users, userRouter
     Route for registering new users
+    Endpoints:
+      * .post(/)
   
   * ##### /api/memory-general, generalRouter
     Route for getting and receiving game data
