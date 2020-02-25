@@ -19,15 +19,16 @@ API Documentation
 
 
   * ##### /api/auth, authRouter
-    <br />
     Route for authentication
+    Endpoints: 
+      * .post(/login)
+      * .post(/refresh)
+         
   
   * ##### /api/users, userRouter
-    <br />
     Route for registering new users
   
-  * #####, /api/memory-general
-    <br />
+  * ##### /api/memory-general, generalRouter
     Route for getting and receiving game data
   
 
