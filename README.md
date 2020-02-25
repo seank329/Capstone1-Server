@@ -18,23 +18,19 @@ API Documentation
   ### Routes ###
 
 
-  * ##### ${config.API_ENDPOINT}/api/memory-general/player/${id}
-    POST   <br />
-    Route for setting up a player's default statistics
+  * ##### /api/auth, authRouter
+    <br />
+    Route for authentication
   
-  * ##### ${config.API_ENDPOINT}/api/memory-general/player/${id}
-    PUT   <br />
-    Route for posting times if quickest, as well as updating games played and total time played
+  * ##### /api/users, userRouter
+    <br />
+    Route for registering new users
   
-  * ##### ${config.API_ENDPOINT}/api/memory-general/player/${id}
-    GET   <br />
-    Route for acquiring player statistics
+  * #####, /api/memory-general
+    <br />
+    Route for getting and receiving game data
   
-  * ##### ${config.API_ENDPOINT}/api/memory-general/experience/${level}
-    GET   <br />
-    Route for getting high scores at each difficulty level. Public 
-       <br />
-       <br />
+
        
    
    Screenshots
