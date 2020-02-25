@@ -20,7 +20,7 @@ var corsOptions = {
 };
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 
 app.use('/api/users', usersRouter);
