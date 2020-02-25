@@ -19,7 +19,7 @@ app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors({
     origin: CLIENT_ORIGIN,
     preflightContinue: true,
-    allowedHeaders : ('content-type, authorization')
+    allowedHeaders : 'content-type, authorization'
 }));
 app.use(helmet());
 
