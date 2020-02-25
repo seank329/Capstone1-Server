@@ -27,7 +27,8 @@ authRouter
           return res.status(400).json({
             error: 'Incorrect player_name or password',
           })
-        const compareMatch = await AuthService.comparePasswords(loginPlayer.password, dbUser.password)
+        return await AuthService.comparePasswords(loginPlayer.password, dbUser.password)
+          .then(compareMatch => {
             if(!compareMatch)
               return res.status(400).json({
                 error: `Incorrect player_name or password`
