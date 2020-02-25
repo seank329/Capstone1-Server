@@ -9,7 +9,7 @@ const jsonBodyParser = express.json()
 const {requireAuth} = require('../middleware/jwt-auth')
 
 authRouter
- .post('/login', jsonBodyParser, (req, res, next) => {
+ .post('/login', jsonBodyParser, async (req, res, next) => {
     const { player_name, password } = req.body
     const loginPlayer = { player_name, password }
     
@@ -34,7 +34,7 @@ authRouter
                 error: `Incorrect player_name or password`
               })
             const sub = dbUser.player_name;
-            const payload = { player_id: dbUser.id }
+            const payload = { memory_user_id: dbUser.id }
             res.send({
               authToken: AuthService.createJwt(sub, payload),
               id:dbUser.id
