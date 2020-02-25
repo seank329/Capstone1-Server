@@ -17,10 +17,7 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors({
-    origin: '*',
-    methods:'*',
-    allowedHeaders : '*',
-    exposedHeaders: '*'
+    origin: '*'
 }));
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", 'https://memory-app-sigma.now.sh');
