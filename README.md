@@ -43,8 +43,8 @@ API Documentation
       
    Description
    -----------
-   This app is a fun game to challenge your memory! Cards are randomly ordered, face down. Try to find matching pairs
-   to clear the game board and try to get the lowest times possible. Login to keep track of your fastest games at each
+   This app is a fun game designed to challenge your memory! Cards are randomly ordered, face down. Try to find matching 
+   pairs to clear the game board and try to get the lowest times possible. Login to keep track of your fastest games at each
    difficulty level, as well as total games played, and total time spent clearing the game-board!
       <br />
       <br />
