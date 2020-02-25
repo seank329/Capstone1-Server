@@ -15,8 +15,8 @@ const jsonBodyParser = express.json();
 // Route for getting all high scores
 generalRouter
     .route('/experience/:level')
-    .get((req, res, next) => {
-        MemoryGeneralService.getHighScores(req.app.get('db'), req.params.level)
+    .get(async (req, res, next) => {
+        await MemoryGeneralService.getHighScores(req.app.get('db'), req.params.level)
         .then(data =>{
             res.json(data)
         })
