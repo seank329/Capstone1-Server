@@ -28,7 +28,7 @@ generalRouter
     .get(requireAuth, (req,res,next) => {
         MemoryGeneralService.getPlayerStats(req.app.get('db'), req.params.id)
         .then(data => {
-            data ? res.status(201).json(data) : res.status(404)
+            data ? res.status(200).json(data) : res.status(404)
         })
         .catch(next)
     })
@@ -43,7 +43,7 @@ generalRouter
         const { player_id, experience, total_time_played, is_quickest } = req.body
         MemoryGeneralService.postTimes(req.app.get('db'), player_id, experience, total_time_played, is_quickest)
         .then(data => {
-            data? res.status(201).json(data) :res.status(404)
+            data? res.status(200).json(data) :res.status(404)
         })
         .catch(next)
     })
