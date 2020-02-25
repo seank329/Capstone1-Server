@@ -16,8 +16,7 @@ const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 var corsOptions = {
-    origin: process.env.CLIENT_ORIGIN,
-    credentials:true
+    origin: process.env.CLIENT_ORIGIN
 };
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
