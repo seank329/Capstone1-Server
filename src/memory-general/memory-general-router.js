@@ -23,18 +23,9 @@ generalRouter
     })
 
 // Route for getting, posting, and updating player data
-generalRouter.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", 'https://memory-app-sigma.now.sh');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json, authorization');
-    next();
-  });
-
-
 generalRouter
     .route('/:id')
-    .get(requireAuth, (req,res,next) => {
+    .get(cors(), requireAuth, (req,res,next) => {
         MemoryGeneralService.getPlayerStats(req.app.get('db'), req.params.id)
         .then(data => {
             data ? res.status(200).json(data) : res.status(404)
