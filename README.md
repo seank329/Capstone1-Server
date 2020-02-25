@@ -31,7 +31,7 @@ API Documentation
     Route for registering new users.   <br />
     Endpoints:
       * .post (/)   <br />
-            > Registering a new player
+         > Registering a new player
   
   * ##### /api/memory-general, generalRouter.   
     Route for getting and receiving game data.   <br />
