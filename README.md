@@ -38,7 +38,8 @@ API Documentation
     Endpoints:
        * .get (/experience/:level)   <br />
             Route for getting high scores at each level. Returns time and player with top score.
-       * .get (/player/:id)
+       * .get (/player/:id)   <br />
+          Route for getting, posting, and updating player data
        * .post (/player/:id)
        * .put (/player/:id
   
