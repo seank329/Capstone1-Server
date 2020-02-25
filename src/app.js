@@ -16,10 +16,17 @@ const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
-app.use(cors({
-    origin: CLIENT_ORIGIN,
-    allowedHeaders : 'Content-Type, Authorization'
-}));
+// app.use(cors({
+//     origin: CLIENT_ORIGIN,
+//     allowedHeaders : 'Content-Type, Authorization'
+// }));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+  });
 app.use(helmet());
 
 app.use('/api/users', usersRouter);
