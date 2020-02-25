@@ -1,6 +1,7 @@
 'use strict';
 require ('dotenv').config()
 const express = require('express')
+const path = require('path')
 const MemoryGeneralService = require('./memory-general-service')
 const generalRouter = express.Router();
 const { requireAuth } = require('../middleware/jwt-auth')
@@ -35,7 +36,11 @@ generalRouter
     .post(async (req, res, next) => {
         await MemoryGeneralService.setPlayerInitialStats(req.app.get('db'), req.params.id)
         .then(data => {
-            data ? res.status(201).json(data) : res.status(404)
+            // data ? res.status(201).json(data) : res.status(404)
+            res
+                .status(201)
+                .location(path.posix.join(req.originalUrl, `/${folder.id}`))
+                .json(serializeFolder)
         })
         .catch(next)
     })
