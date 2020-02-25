@@ -9,7 +9,7 @@ const jsonBodyParser = express.json()
 const {requireAuth} = require('../middleware/jwt-auth')
 
 authRouter
- .post('/login', jsonBodyParser, (req, res, next) => {
+ .post('/login', jsonBodyParser, async (req, res, next) => {
     const { player_name, password } = req.body
     const loginPlayer = { player_name, password }
     
@@ -18,7 +18,7 @@ authRouter
       return res.status(400).json({
           error: `Missing '${field}' in request body` 
       })
-    AuthService.getUserWithUserName(
+    await AuthService.getUserWithUserName(
       req.app.get('db'),
       loginPlayer.player_name
     )
@@ -27,7 +27,7 @@ authRouter
           return res.status(400).json({
             error: 'Incorrect player_name or password',
           })
-        return AuthService.comparePasswords(loginPlayer.password, dbUser.password)
+        const compareMatch = await AuthService.comparePasswords(loginPlayer.password, dbUser.password)
           .then(compareMatch => {
             if(!compareMatch)
               return res.status(400).json({
