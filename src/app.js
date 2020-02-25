@@ -5,8 +5,9 @@ const express = require('express');
 const morgan = require('morgan');
 const cors =  require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config');
+const { NODE_ENV, CLIENT_ORIGIN } = require('./config');
 const authRouter = require('./auth/auth-router');
+const { requireAuth } = require('./middleware/jwt-auth')
 const generalRouter = require('./memory-general/memory-general-router');
 const usersRouter = require('./user/user-router')
 
@@ -15,7 +16,7 @@ const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 var corsOptions = {
-    origin: process.env.CLIENT_ORIGIN,
+    origin: CLIENT_ORIGIN //process.env.CLIENT_ORIGIN,
 };
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
@@ -24,7 +25,7 @@ app.use(helmet());
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/memory-general',  generalRouter);
+app.use('/api/memory-general', generalRouter);
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
