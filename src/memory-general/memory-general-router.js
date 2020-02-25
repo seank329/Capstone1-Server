@@ -39,8 +39,8 @@ generalRouter
             // data ? res.status(201).json(data) : res.status(404)
             res
                 .status(201)
-                .location(path.posix.join(req.originalUrl, `/${folder.id}`))
-                .json(serializeFolder)
+                .location(path.posix.join(req.originalUrl, `/${req.params.id}`))
+                .json()
         })
         .catch(next)
     })
