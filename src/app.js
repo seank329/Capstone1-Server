@@ -17,7 +17,8 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors({
-    origin: CLIENT_ORIGIN
+    origin: CLIENT_ORIGIN,
+    preflightContinue: true
 }));
 app.use(helmet());
 
