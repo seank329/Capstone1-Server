@@ -1,9 +1,13 @@
 'use strict'
 
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const config = require('../config')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
+
+/*
+    Authentication-related database tranasactions.
+*/
 const AuthService = {
     getUserWithUserName(db, player_name) {
         return db('memory_user')
@@ -31,6 +35,6 @@ const AuthService = {
             .toString()
             .split(':')
     },
-}
+};
 
-module.exports = AuthService
+module.exports = AuthService;

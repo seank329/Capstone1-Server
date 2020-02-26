@@ -1,7 +1,7 @@
  require('dotenv')
-const knex = require('knex')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const knex = require('knex');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 /**
  * create a knex instance connected to postgres
@@ -12,7 +12,7 @@ function makeKnexInstance() {
     client: 'pg',
     connection: process.env.TEST_DATABASE_URL
   })
-}
+};
 
 /**
  * create a knex instance connected to postgres
@@ -31,7 +31,7 @@ function makeUsersArray() {
       password: 'password',
     },
   ]
-}
+};
 
 /**
  * make a bearer token with jwt for authorization header
@@ -45,7 +45,7 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
       algorithm: 'HS256',
     })
     return `Bearer ${token}`
-  }
+  };
 
   /**
  * insert users into db with bcrypted passwords and update sequence
@@ -66,7 +66,7 @@ function seedUsers(db, users) {
         [users[users.length - 1].id],
       )
     })
-  }
+  };
 
   /**
  * remove data from tables and reset sequences for SERIAL id fields
@@ -91,7 +91,7 @@ function cleanTables(db) {
           ])
         )
     )
-  }
+  };
 
 function makeData(user) {
   
@@ -121,7 +121,7 @@ function makeData(user) {
     ]
   return stats
 
-  }
+  };
 
   async function seedUsersStats(db, users, stats) {
     await seedUsers(db, users)
@@ -138,7 +138,7 @@ function makeData(user) {
       ), 
       ])
   })
-  }
+  };
 
 
 module.exports = {

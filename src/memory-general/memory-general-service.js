@@ -1,5 +1,10 @@
+
+/*
+    Handles game database-related transactions
+*/
 const MemoryGeneralService = {
 
+    // Get High Scores. Top player (name) and time (in seconds) for each difficulty level is returned
     getHighScores(db, level){
         return db
             .select(
@@ -18,6 +23,7 @@ const MemoryGeneralService = {
 
         },
 
+    // Retrieve all player-statistics
     getPlayerStats(db, id){
         return db
             .select(
@@ -39,7 +45,8 @@ const MemoryGeneralService = {
             })
         },
 
-        setPlayerInitialStats(db, player_id){
+    // Registering a new player sets their initial stats to 0 here.
+    setPlayerInitialStats(db, player_id){
             return db
                 .into('memory_general')
                 .insert({player_id})
@@ -49,7 +56,8 @@ const MemoryGeneralService = {
                 });
         },
 
-        postTimes(db, player_id, experience, total_time, is_quickest){
+    // Post times, if quickest, as well as increment games played as well as total time played
+    postTimes(db, player_id, experience, total_time, is_quickest){
             if(is_quickest){
                 switch(experience){
                     case('beginner'):

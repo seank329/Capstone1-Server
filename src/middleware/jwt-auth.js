@@ -1,20 +1,24 @@
 'use strict';
 
-const AuthService = require('../auth/auth-service')
+const AuthService = require('../auth/auth-service');
 
+
+/*
+  Middleware function checks to make sure that the user requesting resource has the necessary credentials
+*/
 async function requireAuth(req, res, next) {
-  const authToken = req.get('authorization') || ''
+  const authToken = req.get('authorization') || '';
 
   let bearerToken;
   if(!authToken.toLowerCase().startsWith('bearer ')) {
     return res.status(401).json({ error: 'Missing bearer token' })
-  }else{
-    bearerToken = authToken.slice(7, authToken.length)
+  } else {
+    bearerToken = authToken.slice(7, authToken.length);
   }
 
   try {
-    const payload = AuthService.verifyJwt(bearerToken)
-
+    const payload = AuthService.verifyJwt(bearerToken);
+    
     await AuthService.getUserWithUserName(
       req.app.get('db'),
       payload.sub
@@ -22,7 +26,7 @@ async function requireAuth(req, res, next) {
       .then(user => {
         if (!user)
           return res.status(401).json({error: 'Unauthorized request'})
-         req.user = user;
+          req.user = user;
         next()
       })
       .catch(err => {
@@ -36,4 +40,4 @@ async function requireAuth(req, res, next) {
   
 module.exports = {
   requireAuth
-}
+};

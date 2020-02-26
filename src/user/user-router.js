@@ -1,9 +1,9 @@
-const express = require('express')
-const path = require('path')
-const UsersService = require('./user-service')
+const express = require('express');
+const path = require('path');
+const UsersService = require('./user-service');
 
-const usersRouter = express.Router()
-const jsonBodyParser = express.json()
+const usersRouter = express.Router();
+const jsonBodyParser = express.json();
 
 /*
     The 'usersRouter' handles routing related to creation of a new user, as well as the retrieval of a user's
@@ -11,13 +11,14 @@ const jsonBodyParser = express.json()
 */
 usersRouter
 .post('/', jsonBodyParser, (req, res, next) => {
-    const { player_name, password} = req.body
+    const { player_name, password} = req.body;
 
     for (const field of ['player_name', 'password'])
-    if(!req.body[field])
-      return res.status(400).json({
-          error: `Missing '${field}' in request body` 
-      })
+        if(!req.body[field]) {
+            return res.status(400).json({
+                error: `Missing '${field}' in request body` 
+            })
+        }
 
       const passwordError = UsersService.validatePassword(password)
 

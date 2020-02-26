@@ -1,23 +1,27 @@
 'use strict';
-require ('dotenv').config()
-const express = require('express')
-const AuthService = require('./auth-service')
+require ('dotenv').config();
+const express = require('express');
+const AuthService = require('./auth-service');
 
-const authRouter = express.Router()
-const jsonBodyParser = express.json()
+const authRouter = express.Router();
+const jsonBodyParser = express.json();
 
-const {requireAuth} = require('../middleware/jwt-auth')
+const {requireAuth} = require('../middleware/jwt-auth');
 
+/*
+  Route for logging in
+*/
 authRouter
  .post('/login', jsonBodyParser, async (req, res, next) => {
-    const { player_name, password } = req.body
-    const loginPlayer = { player_name, password }
+
+    const { player_name, password } = req.body;
+    const loginPlayer = { player_name, password };
     
     for (const field of ['player_name', 'password'])
-    if(!req.body[field])
-      return res.status(400).json({
-          error: `Missing '${field}' in request body` 
-      })
+      if(!req.body[field])
+        return res.status(400).json({
+            error: `Missing '${field}' in request body` 
+        })
     await AuthService.getUserWithUserName(
       req.app.get('db'),
       loginPlayer.player_name
@@ -33,8 +37,10 @@ authRouter
               return res.status(400).json({
                 error: `Incorrect player_name or password`
               })
+
             const sub = dbUser.player_name;
             const payload = { memory_user_id: dbUser.id }
+
             res.send({
               authToken: AuthService.createJwt(sub, payload),
               id:dbUser.id
@@ -42,7 +48,7 @@ authRouter
           })   
       })
       .catch(next)
-  })
+  });
 
 authRouter.post('/refresh', requireAuth, (req, res) => {
     const sub = req.user.player_name
@@ -50,7 +56,7 @@ authRouter.post('/refresh', requireAuth, (req, res) => {
     res.send({
       authToken: AuthService.createJwt(sub, payload),
     })
-  })
+  });
 
 
-module.exports = authRouter
+module.exports = authRouter;

@@ -9,7 +9,7 @@ const { NODE_ENV, CLIENT_ORIGIN } = require('./config');
 const authRouter = require('./auth/auth-router');
 const { requireAuth } = require('./middleware/jwt-auth')
 const generalRouter = require('./memory-general/memory-general-router');
-const usersRouter = require('./user/user-router')
+const usersRouter = require('./user/user-router');
 
 const app = express();
 
@@ -17,13 +17,13 @@ const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common' ;
 
 app.use(morgan(morganOption, { skip: () => NODE_ENV === 'test' }));
 app.use(cors({
-    origin: 'https://memory-app-sigma.now.sh'
+    origin: 'https://memory-app-sigma.now.sh'   // Necessary for CORS
 }));
 app.use(helmet());
 
-app.use('/api/users', usersRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/memory-general', generalRouter);
+app.use('/api/users', usersRouter);             // User registration
+app.use('/api/auth', authRouter);               // User authentication
+app.use('/api/memory-general', generalRouter);      // All game-related transactions 
 
 app.get('/', (req, res) => {
    res.send('Hello, boilerplate!');
