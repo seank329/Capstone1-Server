@@ -27,34 +27,19 @@ describe('Protected Endpoints', function () {
 
   const protectedEndpoints = [
     {
-      name: 'GET /api/memory-general/games_played/:id',
-      path: '/api/memory-general/games_played/:id',
+      name: 'GET /api/memory-general/player/:id',
+      path: '/api/memory-general/player/:id',
       method: supertest(app).get,
     },
     {
-      name: 'GET /api/memory-general/setup/:id',
-      path: '/api/memory-general/setup/:id',
-      method: supertest(app).get,
+      name: 'POST /api/memory-general/player/:id',
+      path: '/api/memory-general/player/:id',
+      method: supertest(app).pst,
     },
     {
-      name: 'POST /api/memory-general/total_time',
-      path: '/api/memory-general/total_time',
-      method: supertest(app).post,
-    },
-    {
-      name: 'GET /api/memory-general/get_quickest_time/:id/:level',
-      path: '/api/memory-general/get_quickest_time/:id/:level',
-      method: supertest(app).get,
-    },
-    {
-      name: 'POST /api/memory-general/post_quickest',
-      path: '/api/memory-general/post_quickest',
-      method: supertest(app).post,
-    },
-    {
-      name: 'GET /api/memory-general/player_stats/:player',
-      path: '/api/memory-general/player_stats/:player',
-      method: supertest(app).get,
+      name: 'PUT /api/memory-general/player/:id',
+      path: '/api/memory-general/player/:id',
+      method: supertest(app).put,
     },
   ]
 
