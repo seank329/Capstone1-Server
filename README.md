@@ -46,7 +46,13 @@ API Documentation
    
    Screenshots
    -----------
-   Please Visit : https://github.com/seank329/Capstone1-UI/blob/master/README.md
+   ![Alt Landing](/images/001.png)
+   ![Alt High Scores](/images/002.png)
+   ![Alt Login](/images/003.png)
+   ![Alt Game Screen](/images/004.png)
+   ![Alt Player Stats](/images/005.png)
+      <br />
+      <br />
       
    Description
    -----------
