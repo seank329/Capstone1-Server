@@ -34,7 +34,7 @@ describe('Protected Endpoints', function () {
     {
       name: 'POST /api/memory-general/player/:id',
       path: '/api/memory-general/player/:id',
-      method: supertest(app).pst,
+      method: supertest(app).post,
     },
     {
       name: 'PUT /api/memory-general/player/:id',

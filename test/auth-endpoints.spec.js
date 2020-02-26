@@ -72,7 +72,7 @@ describe('Auth Endpoints', function () {
         password: testUser.password,
       }
       const expectedToken = jwt.sign(
-        { player_id: testUser.id },
+        { memory_user_id: testUser.id },
         process.env.JWT_SECRET,
         {
           subject: testUser.player_name,
@@ -85,6 +85,7 @@ describe('Auth Endpoints', function () {
         .send(userValidCreds)
         .expect(200, {
           authToken: expectedToken,
+          id:testUser.id
         })
     })
   })
